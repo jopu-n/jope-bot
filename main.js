@@ -51,6 +51,9 @@ client.on("message", message => {
     else if(command == "skip" || command == "s"){
         client.commands.get("skip").execute(message);
     }
+    else if(command == "gachi" || command == "g"){
+        client.commands.get("gachi").execute(message);
+    }
     
 })
 
