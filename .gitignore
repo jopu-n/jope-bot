@@ -1,3 +1,4 @@
-*.json
+config.json
 
 node_modules/
+gachi_sounds/
