@@ -32,11 +32,11 @@ module.exports = {
         let chosenFile = dirPath + '\\' + files[Math.floor(Math.random() * files.length)];
         let resFile = path.resolve(__filename, chosenFile);
 
-        let resource = createAudioResource(resFile);
+        let resource = createAudioResource(resFile, { inlineVolume: true });
+        resource.volume.setVolume(2);
         const player = createAudioPlayer();
         player.play(resource);
         connection.subscribe(player);
-        
-        player.on(AudioPlayerStatus.Idle, () => connection.destroy());
+    
     }
 }

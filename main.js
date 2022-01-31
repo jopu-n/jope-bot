@@ -54,7 +54,9 @@ client.on("message", message => {
     else if(command == "gachi" || command == "g"){
         client.commands.get("gachi").execute(message);
     }
-    
+    else if(command == "leave" || command == "l"){
+        client.commands.get("leave").execute(message);
+    }
 })
 
 
