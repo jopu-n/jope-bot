@@ -48,7 +48,7 @@ client.on("message", message => {
     else if(command == "play" || command == "p"){
         client.commands.get("play").execute(message, args);
     }
-    else if(command == "skip" || command == "s"){
+    else if(command == "skip" || command == "s" || command == "seis"){
         client.commands.get("skip").execute(message);
     }
     else if(command == "gachi" || command == "g"){

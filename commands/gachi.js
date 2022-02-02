@@ -14,29 +14,31 @@ module.exports = {
     description: "trying to make a command that plays gachimuchi sounds",
 
     async execute(message, args){
-        const channel = message.member.voice.channel;
+        try{ // Does this even do anything?
+            const channel = message.member.voice.channel;
 
-        if(!channel) return message.channel.send("Mee ny eka kanavalle hei :rage:");
-        const permissions = channel.permissionsFor(message.client.user);
-        if(!permissions.has("CONNECT")) return message.channel.send("Ei ol oikeuksii");
-        if(!permissions.has("SPEAK")) return message.channel.send("Ei ol oikeuksii");
-        
-        const connection = await joinVoiceChannel({
-            channelId: message.member.voice.channel.id,
-            guildId: message.guild.id,
-            adapterCreator: message.guild.voiceAdapterCreator
-        })
-        
-        const dirPath = path.resolve(__dirname, './gachi_sounds');
-        var files = fs.readdirSync(dirPath);
-        let chosenFile = dirPath + '\\' + files[Math.floor(Math.random() * files.length)];
-        let resFile = path.resolve(__filename, chosenFile);
+            if(!channel) return message.channel.send("Mee ny eka kanavalle hei :rage:");
+            const permissions = channel.permissionsFor(message.client.user);
+            if(!permissions.has("CONNECT")) return message.channel.send("Ei ol oikeuksii");
+            if(!permissions.has("SPEAK")) return message.channel.send("Ei ol oikeuksii");
+            
+            const connection = await joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.guild.id,
+                adapterCreator: message.guild.voiceAdapterCreator
+            })
+            
+            const dirPath = path.resolve(__dirname, './gachi_sounds');
+            var files = fs.readdirSync(dirPath);
+            let chosenFile = dirPath + '\\' + files[Math.floor(Math.random() * files.length)];
+            let resFile = path.resolve(__filename, chosenFile);
 
-        let resource = createAudioResource(resFile, { inlineVolume: true });
-        resource.volume.setVolume(2);
-        const player = createAudioPlayer();
-        player.play(resource);
-        connection.subscribe(player);
-    
+            let resource = createAudioResource(resFile)
+            const player = createAudioPlayer();
+            player.play(resource);
+            connection.subscribe(player);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
