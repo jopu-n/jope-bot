@@ -11,16 +11,21 @@ module.exports = {
     description: "makes the bot leave a voice channel",
 
     async execute(message){
-        const connection = await joinVoiceChannel({
-            channelId: message.member.voice.channel.id,
-            guildId: message.guild.id,
-            adapterCreator: message.guild.voiceAdapterCreator
-        })
+        try{
+            const connection = await joinVoiceChannel({
+                channelId: message.member.voice.channel.id,
+                guildId: message.guild.id,
+                adapterCreator: message.guild.voiceAdapterCreator
+            })
 
-        if(connection){
-            connection.destroy();
-            message.channel.send("Ilpo lähtee nyt.");
+            if(connection){
+                connection.destroy();
+                message.channel.send("Ilpo lähtee nyt.");
+            }
+            else {message.channel.send("Ilpo ei ole millään kanavalla.")}
+        } catch(err){
+            console.error(err);
+            message.channel.send("Tuli virhe mut ei haittaa koska jope on hyvä koodari")
         }
-        else {message.channel.send("Ilpo ei ole millään kanavalla.")}
     }
 }
