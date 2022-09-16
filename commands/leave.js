@@ -25,7 +25,7 @@ module.exports = {
             else {message.channel.send("Ilpo ei ole millään kanavalla.")}
         } catch(err){
             console.error(err);
-            message.channel.send("Tuli virhe mut ei haittaa koska jope on hyvä koodari")
+            message.channel.send("Tuli virhe mut ei haittaa koska jope on hyvä koodari \n" + err )
         }
     }
 }

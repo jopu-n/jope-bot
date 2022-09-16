@@ -20,11 +20,16 @@ module.exports = {
         if(!query.length) return message.channel.send("Mul pitäs olla hakusana tai linkki...");
 
         console.log(query);
-
-        music.play({
-            interaction: message,
-            channel: channel,
-            song: query
-        });
+        try {
+            music.play({
+                interaction: message,
+                channel: channel,
+                song: query
+            });
+        } catch(e) {
+            console.error(e);
+            message.channel.send("Virhe " + e)
+            message.channel.connection.destroy();
+        }
     }
 }

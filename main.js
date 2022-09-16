@@ -31,6 +31,17 @@ music.event.on('addSong', (channel, songInfo) => {
 
 client.on("message", message => {
 
+    let checkMention = message.content.split(" ")[0]
+    if(checkMention == "<@769129605536940032>"){
+        if ( typeof(message.content.split(" ")[1]) === 'undefined') {
+            message.channel.send("Yes daddy :3");
+            return;
+        }
+        let i = Math.floor(Math.random() * 5);
+        let msgs = ["Juu :3","Ehdottomasti!","Mahdollisesti :flushed:","Ei missään tapauksessa!","Eei..."];
+        message.channel.send(msgs[i]);
+        return;
+    }
     if(!message.content.startsWith(PREFIX) || message.author.bot) return;
 
     const args = message.content.slice(PREFIX.length).split(" ");
@@ -56,6 +67,12 @@ client.on("message", message => {
     }
     else if(command == "leave" || command == "l"){
         client.commands.get("leave").execute(message);
+    }
+    else if (command == "degen"){
+        client.commands.get("degen").execute(message, args);
+    }
+    else if (command == "commands"){
+        client.commands.get("commands").execute(message, args);
     }
 })
 
